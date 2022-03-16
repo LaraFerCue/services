@@ -1,5 +1,9 @@
 version: '3'
 
+networks:
+  web:
+    name: "web"
+
 services:
   reverse-proxy:
     # The official v2 Traefik docker image
@@ -14,3 +18,5 @@ services:
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - web
