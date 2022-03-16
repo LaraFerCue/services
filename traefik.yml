@@ -1,9 +1,5 @@
 version: '3'
 
-networks:
-  web:
-    name: "web"
-
 services:
   reverse-proxy:
     # The official v2 Traefik docker image
@@ -21,3 +17,7 @@ services:
       - /srv/traefik:/etc/traefik
     networks:
       - web
+
+networks:
+  web:
+    driver: custom-driver-1
