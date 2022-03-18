@@ -19,5 +19,6 @@ services:
       - web
 
 networks:
-  web:
-    driver: custom-driver-1
+  backend:
+    driver: bridge
+  frontend:
