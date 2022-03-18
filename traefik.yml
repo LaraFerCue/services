@@ -17,11 +17,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /srv/traefik:/etc/traefik
     networks:
-      - frontend
+      - host
       - backend
 
 networks:
   backend:
     driver: bridge
-  frontend:
-    driver: host
