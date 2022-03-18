@@ -23,3 +23,5 @@ services:
 networks:
   backend:
     driver: bridge
+  host:
+    external: true
