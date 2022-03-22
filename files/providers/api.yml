@@ -1,0 +1,15 @@
+http:
+  routers:
+    dashboard:
+      rule: Host("barbunicorn.gay") && (PathPrefix("/api") || PathPrefix("/dashboard"))
+      tls: true
+      entrypoints:
+        - websecure
+      service: api@internal
+      middlewares:
+        - auth
+
+  middlewares:
+    auth:
+      basicAuth:
+        users:
