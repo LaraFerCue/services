@@ -1,27 +1,37 @@
 version: '3'
 
 services:
-  reverse-proxy:
+  traefik:
+    container_name: traefik
     # The official v2 Traefik docker image
     image: traefik:v2.6
     # Enables the web UI and tells Traefik to listen to docker
-    command: --api.insecure=true --providers.docker
     ports:
-      # The HTTP port
       - "80:80"
-      # The Web UI (enabled by --api.insecure=true)
-      - "8080:8080"
       - "443:443"
     volumes:
-      # So that Traefik can listen to the Docker events
-      - /var/run/docker.sock:/var/run/docker.sock
       - /srv/traefik:/etc/traefik
     networks:
-      - host
-      - backend
+      - proxy
+    environment:
+      DOCKER_HOST: dockersocket
+    restart: unless-stopped
+    depends_on:
+      - dockersocket
+
+  dockersocket:
+    container_name: dockersocket
+    image: tecnativa/docker-socket-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy
+    environment:
+      CONTAINERS: 1
+      POST: 0
+    privileged: true
+    restart: unless-stopped
 
 networks:
-  backend:
-    driver: bridge
-  host:
+  proxy:
     external: true
