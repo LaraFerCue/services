@@ -1,15 +1,23 @@
 entryPoints:
   web:
     address: :80
-      http:
-        redirections:
-          entryPoint:
-            to: websecure
-            scheme: https
-      websecure:
-        address: :443
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+  websecure:
+    address: :443
 
-tls:
-  certificates:
-    - certFile: /etc/traefik/barbunicorn.gay.crt
-    - keyFile: /etc/traefik/barbunicorn.key
+providers:
+  file:
+    directory: /etc/traefik/providers
+    watch: true
+
+log:
+  filePath: "/var/log/traefik.log"
+  level: DEBUG
+
+api:
+  dashboard: true
+
