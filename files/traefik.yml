@@ -13,11 +13,15 @@ providers:
   file:
     directory: /etc/traefik/providers
     watch: true
+  docker:
+    endpoint: "tcp://dockersocket:2375"
 
 log:
   filePath: "/var/log/traefik.log"
   level: DEBUG
 
+accessLog:
+  filePath: "/var/log/access.log"
+
 api:
   dashboard: true
-

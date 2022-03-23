@@ -10,7 +10,8 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - /srv/traefik:/etc/traefik
+      - /srv/traefik:/etc/traefik:ro
+      - /var/log/traefik:/var/log
     networks:
       - proxy
     environment:
