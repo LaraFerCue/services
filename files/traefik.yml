@@ -25,3 +25,11 @@ accessLog:
 
 api:
   dashboard: true
+
+certificatesResolvers:
+  barbResolver:
+    acme:
+      email: barbunicorn@barbunicorn.gay
+      storage: /certs/acme.json
+      httpChallenge:
+        entrypoint: web

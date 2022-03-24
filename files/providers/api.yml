@@ -1,8 +1,9 @@
 http:
   routers:
     dashboard:
-      rule: Host("barbunicorn.gay") && (PathPrefix("/api") || PathPrefix("/dashboard"))
-      tls: true
+      rule: Host("traefik.barbunicorn.gay")
+      tls:
+        certResolver: barbResolver
       entrypoints:
         - websecure
       service: api@internal

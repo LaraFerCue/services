@@ -11,6 +11,7 @@ services:
       - "443:443"
     volumes:
       - /srv/traefik:/etc/traefik:ro
+      - /srv/traefik/acme.json:/certs/acme.json
       - /var/log/traefik:/var/log
     networks:
       - proxy
