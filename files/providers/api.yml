@@ -13,3 +13,4 @@ http:
     auth:
       basicAuth:
         users:
+          - %%USER_PASSWORD%%
