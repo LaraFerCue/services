@@ -8,6 +8,10 @@ endif
 TRAEFIK_DATA=	/srv/traefik
 WORKDIR=	${CURDIR}/work
 
+CONTAINERS=	traefik portainer mailserver
+UP_TARGETS=	$(foreach container,${CONTAINERS},${container}/up)
+DOWN_TARGETS=	$(foreach container,${CONTAINERS},${container}/down)
+
 ${WORKDIR}:
 	mkdir -p ${@}
 
@@ -34,8 +38,9 @@ ${WORKDIR}/api.yml: ${WORKDIR} ${WORKDIR}/config.user_pass
 
 .PHONY: traefik/up traefik/down
 traefik/up: ${TRAEFIK_DATA}/traefik.yml ${TRAEFIK_DATA}/acme.json ${TRAEFIK_DATA}/providers/api.yml
-traefik/up portainer/up:
+${UP_TARGETS}:
 	${SUDO} docker-compose -f $(subst /up,,${@}).yml up -d
 
-traefik/down portainer/down:
+${DOWN_TARGETS}:
 	${SUDO} docker-compose -f $(subst /down,,${@}).yml down
+
