@@ -5,9 +5,18 @@ services:
     image: docker.io/mailserver/docker-mailserver:latest
     hostname: barbunicorn.gay
     env_file: files/mailserver.env
+    ports:
+      - "25:25"    # SMTP  (explicit TLS => STARTTLS)
+      - "143:143"  # IMAP4 (explicit TLS => STARTTLS)
+      - "465:465"  # ESMTP (implicit TLS)
+      - "587:587"  # ESMTP (explicit TLS => STARTTLS)
+      - "993:993"  # IMAP4 (implicit TLS)
+    volumes:
     volumes: 
       - mail_data:/var/mail/
       - mail_state:/var/mail-state/
+      - mail_dms_config:/tmp/docker-mailserver
+      - /var/log/mail/:/var/log/mail/
       - /etc/localtime:/etc/localtime:ro
     restart: always
     stop_grace_period: 1m
@@ -18,3 +27,4 @@ services:
 volumes:
   mail_data:
   mail_state:
+  mail_dms_config:
