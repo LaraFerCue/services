@@ -15,7 +15,7 @@ services:
     volumes: 
       - mail_data:/var/mail/
       - mail_state:/var/mail-state/
-      - mail_dms_config:/tmp/docker-mailserver
+      - /srv/mail/config/:/tmp/docker-mailserver
       - /var/log/mail/:/var/log/mail/
       - /etc/localtime:/etc/localtime:ro
     restart: always
