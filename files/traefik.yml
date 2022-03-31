@@ -8,6 +8,8 @@ entryPoints:
           scheme: https
   websecure:
     address: :443
+  minecraft:
+    address: :25565
 
 providers:
   file:

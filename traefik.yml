@@ -9,6 +9,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
+      - "25565:25565" # Minecraft servers
     volumes:
       - /srv/traefik:/etc/traefik:ro
       - /srv/traefik/acme.json:/certs/acme.json
