@@ -1,0 +1,36 @@
+version: "3"
+services:
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - /srv/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/data
+    networks:
+      - proxy
+    restart: unless-stopped
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    environment:
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
+    networks:
+      - proxy
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - /srv/grafana/grafana.ini:/etc/grafana/grafana.ini:ro
+      - /var/log/grafana:/var/log/grafana
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.grafana.rule=Host("grafana.barbunicorn.gay")
+      - traefik.http.routers.grafana.tls.certresolver=barbResolver
+
+volumes:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  proxy:
+    external: true
