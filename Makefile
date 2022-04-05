@@ -5,20 +5,16 @@ ifneq (${USER}, root)
 SUDO=sudo
 endif
 
-DOMAIN=		barbunicorn.gay
-
 WORKDIR=	${CURDIR}/work
 
-export WORKDIR
+export WORKDIR SUDO
 
-CONTAINERS=	traefik portainer mailserver
-UP_TARGETS=	$(foreach container,${CONTAINERS},${container}/up)
-DOWN_TARGETS=	$(foreach container,${CONTAINERS},${container}/down)
+%/config:
+	make -C $(dir ${@}) config
 
-.PHONY: traefik/up traefik/down
-${UP_TARGETS}:
+%/up:
 	make -C $(dir ${@}) config
 	cd $(dir ${@}) && ${SUDO} docker-compose up -d
 
-${DOWN_TARGETS}:
+%/down:
 	cd $(dir ${@}) && ${SUDO} docker-compose down
