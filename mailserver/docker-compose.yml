@@ -3,7 +3,8 @@ services:
   mailserver:
     container_name: mailserver
     image: docker.io/mailserver/docker-mailserver:latest
-    hostname: barbunicorn.gay
+    hostname: mail
+    domain: barbunicorn.gay
     env_file: files/mailserver.env
     ports:
       - "25:25"    # SMTP  (explicit TLS => STARTTLS)
