@@ -25,11 +25,13 @@ services:
     volumes:
       - /srv/gitlab-runner/config:/etc/gitlab-runner
       - /var/run/docker.sock:/var/run/docker.sock
+      - gitlab_runner_data:/home/gitlab-runner
     networks:
       - proxy
 
 volumes:
   gitlab_data:
+  gitlab_runner_data:
 
 networks:
   proxy:
