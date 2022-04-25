@@ -18,6 +18,15 @@ services:
       - traefik.http.services.gitlab.loadbalancer.server.port=80
       - traefik.http.routers.gitlab.service=gitlab
       - traefik.http.routers.gitlab.tls.certresolver=barbResolver
+  gitlab_runner:
+    container_name: gitlab_runner
+    image: gitlab/gitlab-runner
+    restart: always
+    volumes:
+      - /srv/gitlab-runner/config:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy
 
 volumes:
   gitlab_data:
