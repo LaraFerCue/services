@@ -16,7 +16,7 @@ services:
       - mail_data:/var/mail/
       - mail_state:/var/mail-state/
       - /srv/mail/config/:/tmp/docker-mailserver
-      - /srv/trafik/acme.json:/etc/letsencrypt/acme.json:ro
+      - /srv/mail/letsencrypt:/etc/letsencrypt
       - /var/log/mail/:/var/log/mail/
       - /etc/localtime:/etc/localtime:ro
     restart: always
@@ -24,11 +24,6 @@ services:
     cap_add:
       - NET_ADMIN
       - SYS_PTRACE
-  whoami:
-    image: traefik/whoami
-    labels:
-      - traefik.http.routers.whoami.rule=Host("mail.barbunicorn.gay")
-      - traefik.http.routers.whoami.tls.certresolver=barbResolver
 
 volumes:
   mail_data:
