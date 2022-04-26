@@ -17,6 +17,8 @@ services:
       - mail_state:/var/mail-state/
       - /srv/mail/config/:/tmp/docker-mailserver
       - /srv/mail/letsencrypt:/etc/letsencrypt
+      - /srv/mail/barbunicorn.crt:/certs/barbunicorn.gay.crt
+      - /srv/mail/barbunicorn.key:/certs/barbunicorn.key
       - /var/log/mail/:/var/log/mail/
       - /etc/localtime:/etc/localtime:ro
     restart: always
