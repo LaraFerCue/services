@@ -27,7 +27,7 @@ services:
   whoami:
     image: traefik/whoami
     labels:
-      - trafik.http.routers.whoami.rule=Host("mail.barbunicorn.gay")
+      - traefik.http.routers.whoami.rule=Host("mail.barbunicorn.gay")
 
 volumes:
   mail_data:
