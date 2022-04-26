@@ -27,8 +27,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - gitlab_runner_data:/home/gitlab-runner
       - gitlab_runner_docker:/root/.docker/machine
-    networks:
-      - proxy
 
 volumes:
   gitlab_data:
