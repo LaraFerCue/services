@@ -22,7 +22,7 @@ services:
       - traefik.http.routers.registry.rule=Host("registry.barbunicorn.gay")
       - traefik.http.services.registry.loadbalancer.server.port=5050
       - traefik.http.routers.registry.service=registry
-      - traefik.http.routers.gitlab.tls.certresolver=barbResolver
+      - traefik.http.routers.registry.tls.certresolver=barbResolver
   gitlab_runner:
     container_name: gitlab_runner
     image: gitlab/gitlab-runner
