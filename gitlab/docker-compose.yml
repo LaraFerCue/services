@@ -28,6 +28,11 @@ services:
       - gitlab_runner_data:/home/gitlab-runner
       - gitlab_runner_docker:/root/.docker/machine
 
+      - traefik.http.routers.registry.rule=Host("registry.barbunicorn.gay")
+      - traefik.http.services.registry.loadbalancer.server.port=5050
+      - traefik.http.routers.registry.service=registry
+      - traefik.http.routers.gitlab.tls.certresolver=barbResolver
+
 volumes:
   gitlab_data:
   gitlab_runner_data:
