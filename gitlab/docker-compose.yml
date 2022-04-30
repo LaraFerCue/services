@@ -25,7 +25,7 @@ services:
       - traefik.http.routers.registry.tls.certresolver=barbResolver
   gitlab_runner:
     container_name: gitlab_runner
-    image: gitlab/gitlab-runner
+    image: gitlab/gitlab-runner:alpine
     restart: always
     volumes:
       - /srv/gitlab-runner/config:/etc/gitlab-runner
