@@ -1,0 +1,17 @@
+version: "3"
+services:
+  dayz:
+    build: .
+    hostname: dayz.barbunicorn.gay
+    ports:
+      - 2302:2302/udp
+      - 27016:27016/udp
+    volumes:
+      - dayz_data:/data:rw
+      - /srv/dayz/serverDZ.cfg:/dayz/serverDZ_barb.cfg:ro
+    deploy:
+      resources:
+        limits:
+          memory: 8g
+volumes:
+  dayz_data:
