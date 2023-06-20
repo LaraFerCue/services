@@ -9,13 +9,7 @@ services:
     volumes:
       - /srv/valheim/config:/config
       - /srv/valheim/data:/opt/valheim
-    labels:
-      - traefik.enable=true
-      - traefik.udp.routers.valheim.entrypoints="valheim"
-      - traefik.udp.routers.valheim.service="valheim"
-      - traefik.udp.routers.valheim.rule=Host("valhalla.barbunicorn.gay")
-      - traefik.udp.routers.services.valheim.loadbalancer.server.port=2456
-      - traefik.http.routers.super-valheim.rule=Host("super-valhalla.barbunicorn.gay")
-      - traefik.http.routers.super-valheim.tls.certresolver=barbResolver
+    ports:
+      - 2456-2458:2456-2458/udp
     restart: always
     stop_grace_period: 2m
