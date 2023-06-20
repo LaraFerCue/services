@@ -11,5 +11,7 @@ services:
       - /srv/valheim/data:/opt/valheim
     ports:
       - 2456-2458:2456-2458/udp
+    env_file:
+      - /srv/valheim/valheim.env
     restart: always
     stop_grace_period: 2m
