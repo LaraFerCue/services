@@ -8,10 +8,6 @@ entryPoints:
           scheme: https
   websecure:
     address: :443
-  minecraft:
-    address: :25565
-  valheim:
-    address: :2456/udp
   imap:
     address: :143
   smtp:
