@@ -21,6 +21,8 @@ services:
     restart: unless-stopped
     depends_on:
       - dockersocket
+    cpus: 0.2
+    mem_limit: 5g
 
   dockersocket:
     container_name: dockersocket
@@ -34,6 +36,8 @@ services:
       POST: 0
     privileged: true
     restart: unless-stopped
+    cpus: 0.2
+    mem_limit: 5g
 
 networks:
   proxy:

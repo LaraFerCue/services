@@ -13,6 +13,8 @@ services:
       - /srv/nginx/barbunicorn/:/usr/share/nginx/html:ro
     networks:
       - proxy
+    cpus: 0.2
+    mem_limit: 5g
 
 networks:
   proxy:

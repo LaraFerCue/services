@@ -11,6 +11,8 @@ services:
     networks:
       - proxy
     restart: unless-stopped
+    cpus: 0.2
+    mem_limit: 5g
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
@@ -29,6 +31,8 @@ services:
       - traefik.http.routers.grafana.tls.certresolver=barbResolver
     depends_on:
       - prometheus
+    cpus: 0.2
+    mem_limit: 5g
 
 volumes:
   prometheus_data:

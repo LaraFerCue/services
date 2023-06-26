@@ -1,4 +1,4 @@
-version: "3.6"
+version: "2.2"
 services:
   gitlab:
     container_name: gitlab
@@ -23,6 +23,8 @@ services:
       - traefik.http.services.registry.loadbalancer.server.port=5050
       - traefik.http.routers.registry.service=registry
       - traefik.http.routers.registry.tls.certresolver=barbResolver
+    cpus: 0.2
+    mem_limit: 5g
   gitlab_runner:
     container_name: gitlab_runner
     image: gitlab/gitlab-runner:alpine
@@ -32,6 +34,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - gitlab_runner_data:/home/gitlab-runner
       - gitlab_runner_docker:/root/.docker/machine
+    cpus: 0.2
+    mem_limit: 5g
 
 volumes:
   gitlab_data:

@@ -21,6 +21,8 @@ services:
       - /srv/mail/barbunicorn.key:/certs/barbunicorn.key
       - /var/log/mail/:/var/log/mail/
       - /etc/localtime:/etc/localtime:ro
+    cpus: 0.2
+    mem_limit: 5g
     restart: always
     stop_grace_period: 1m
     cap_add:
