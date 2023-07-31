@@ -15,14 +15,27 @@ services:
       - portainer_data:/data
     labels:
       - traefik.enable=true
+
+      - traefik.http.routers.http-portainer.rule=Host("portainer.barbunicorn.gay")
+      - traefik.http.routers.http-portainer.entrypoints=web
+      - traefik.http.routers.http-portainer.middlewares=https@file
+      - traefik.http.routers.http-portainer.service=portainer
+
       - traefik.http.routers.portainer.rule=Host("portainer.barbunicorn.gay")
       - traefik.http.services.portainer.loadbalancer.server.port=9000
       - traefik.http.routers.portainer.service=portainer
+      - traefik.http.routers.portainer.entrypoints=websecure
       - traefik.http.routers.portainer.tls.certresolver=barbResolver
+
+      - traefik.http.routers.http-edge.rule=Host("edge.barbunicorn.gay")
+      - traefik.http.routers.http-edge.entrypoints=web
+      - traefik.http.routers.http-edge.middlewares=https@file
+      - traefik.http.routers.http-edge.service=edge
 
       - traefik.http.routers.edge.rule=Host("edge.barbunicorn.gay")
       - traefik.http.services.edge.loadbalancer.server.port=8000
       - traefik.http.routers.edge.service=edge
+      - traefik.http.routers.edge.entrypoints=websecure
       - traefik.http.routers.edge.tls.certresolver=barbResolver
     networks:
       - proxy
