@@ -1,5 +1,12 @@
 http:
   routers:
+    http_dashboard:
+      rule: Host("traefik.barbunicorn.gay")
+      service: api@internal
+      entrypoints:
+        - web
+      middlewares:
+        - https
     dashboard:
       rule: Host("traefik.barbunicorn.gay")
       tls:
@@ -11,6 +18,9 @@ http:
         - auth
 
   middlewares:
+    https:
+      redirectScheme:
+        scheme: https
     auth:
       basicAuth:
         users:

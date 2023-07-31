@@ -1,17 +1,13 @@
 entryPoints:
   web:
     address: :80
-    http:
-      redirections:
-        entryPoint:
-          to: websecure
-          scheme: https
+    #http:
+    #  redirections:
+    #    entryPoint:
+    #      to: websecure
+    #      scheme: https
   websecure:
     address: :443
-  imap:
-    address: :143
-  smtp:
-    address: :587
 
 providers:
   file:
