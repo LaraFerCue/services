@@ -7,7 +7,13 @@ services:
 
     labels:
       - traefik.enable=true
-      - traefik.http.routers.httpserver.rule=Host("www.barbunicorn.gay")
+
+      - traefik.http.routers.http-httpserver.rule=Host("www.barbunicorn.gay", "barbunicorn.gay")
+      - traefik.http.routers.http-httpserver.entrypoints=web
+      - traefik.http.routers.http-httpserver.middlewares=https@file
+
+      - traefik.http.routers.httpserver.rule=Host("www.barbunicorn.gay", "barbunicorn.gay")
+      - traefik.http.routers.httpserver.entrypoints=websecure
       - traefik.http.routers.httpserver.tls.certresolver=barbResolver
     volumes:
       - /srv/nginx/barbunicorn/:/usr/share/nginx/html:ro

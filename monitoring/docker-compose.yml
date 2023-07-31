@@ -40,8 +40,15 @@ services:
     mem_limit: 5g
     labels:
       - traefik.enable=true
+
+      - traefik.http.routers.http-prometheus.rule=Host("prometheus.barbunicorn.gay")
+      - traefik.http.routers.http-prometheus.service=prometheus
+      - traefik.http.routers.http-prometheus.entrypoints=web
+      - traefik.http.routers.http-prometheus.middlewares=https@file
+
       - traefik.http.routers.prometheus.rule=Host("prometheus.barbunicorn.gay")
       - traefik.http.routers.prometheus.service=prometheus
+      - traefik.http.routers.prometheus.entrypoints=websecure
       - traefik.http.services.prometheus.loadbalancer.server.port=9090
       - traefik.http.routers.prometheus.tls.certresolver=barbResolver
   grafana:
@@ -58,7 +65,12 @@ services:
       - /var/log/grafana:/var/log/grafana
     labels:
       - traefik.enable=true
+      - traefik.http.routers.http-grafana.rule=Host("grafana.barbunicorn.gay")
+      - traefik.http.routers.http-grafana.entrypoints=web
+      - traefik.http.routers.http-grafana.middlewares=https@file
+
       - traefik.http.routers.grafana.rule=Host("grafana.barbunicorn.gay")
+      - traefik.http.routers.grafana.entrypoints=websecure
       - traefik.http.routers.grafana.tls.certresolver=barbResolver
     cpus: 0.05
     mem_limit: 5g
