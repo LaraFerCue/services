@@ -13,7 +13,7 @@ export WORKDIR SUDO
 	make -C $(dir ${@}) config
 
 %/up:
-	cd $(dir ${@}) && ${SUDO} docker-compose up -d
+	cd $(dir ${@}) && ${SUDO} docker-compose pull && ${SUDO} docker-compose up -d
 
 %/down:
 	cd $(dir ${@}) && ${SUDO} docker-compose down
