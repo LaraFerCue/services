@@ -17,6 +17,7 @@ services:
       - traefik.http.routers.httpserver.tls.certresolver=barbResolver
     volumes:
       - /srv/nginx/barbunicorn/:/usr/share/nginx/html:ro
+      - /srv/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     networks:
       - proxy
     cpus: 0.2
